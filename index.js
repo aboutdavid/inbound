@@ -59,13 +59,13 @@ const app = new App({
           txt += `\n\n*${flight.ident_iata} (${flight.ident_icao}): ${flight.origin?.code_iata} (${flight.origin?.code_icao}) -> ${flight.destination?.code_iata} (${flight.destination?.code_icao})*\n`
           txt += `ℹ️ Status: ${flight.status} • 🛄 Baggage claim: ${flight.baggage_claim || "None"} • ⛩️ Gate at ${flight.origin?.code_iata}: ${flight.gate_origin || "Unknown"} • ⛩️ Gate at ${flight.destination?.code_iata}: ${flight.gate_destination || "Unknown"} • 📏 ${flight.route_distance || "Unknown"} miles • 🏎️ ${flight.filed_airspeed || "Unknown"} mph \n`
           txt += `🛫 Take off (scheduled): ${flight.scheduled_off ? utils.fmtDate(flight.scheduled_off, event.timezone) : "Unknown"} `
-          txt += `(Estimated: ${flight.actual_off ? utils.fmtDate(flight.estimated_off, event.timezone) : "Unknown"}) `
+          txt += `(Estimated: ${flight.estimated_off ? utils.fmtDate(flight.estimated_off, event.timezone) : "Unknown"}) `
           txt += `(Actual: ${flight.actual_off ? utils.fmtDate(flight.actual_off, event.timezone) : "Unknown"})\n`
-          if (flight.scheduled_off && flight.actual_off) txt += `_${utils.humanReadableDiff(flight.scheduled_off, flight.actual_off)}_\n`
+          if (flight.scheduled_off && (flight.actual_off || flight.estimated_off)) txt += `_${utils.humanReadableDiff(flight.scheduled_off, flight.actual_off || flight.estimated_off)}_\n`
           txt += `🛬 Landing (scheduled): ${flight.scheduled_in ? utils.fmtDate(flight.scheduled_in, event.timezone) : "Unknown"} `
-          txt += `(Estimated: ${flight.estimated_in_in ? utils.fmtDate(flight.estimated_in, event.timezone) : "Unknown"}) `
+          txt += `(Estimated: ${flight.estimated_in ? utils.fmtDate(flight.estimated_in, event.timezone) : "Unknown"}) `
           txt += `(Actual: ${flight.actual_in ? utils.fmtDate(flight.actual_in, event.timezone) : "Unknown"})\n`
-          if (flight.scheduled_in && flight.actual_in) txt += `_${utils.humanReadableDiff(flight.scheduled_in, flight.actual_in)}_\n`
+          if (flight.scheduled_in && (flight.actual_in || flight.estimated_in)) txt += `_${utils.humanReadableDiff(flight.scheduled_in, flight.actual_in || flight.estimated_in)}_\n`
 
           txt += `Progress: (${flight.progress_percent}%) ${utils.progress(flight.progress_percent)}\n`
 
