@@ -3,7 +3,7 @@ import re
 from datetime import datetime
 
 def is_valid_iata(code):
-    return re.fullmatch(r'[A-Z]{2}\d{1,4}', code) is not None
+    return re.fullmatch(r'[A-Za-z0-9]*[A-Za-z][A-Za-z0-9]*\d{1,4}', code) is not None
 def is_valid_date(date):
     # Check if the date matches the format YYYY-MM-DD
     try:

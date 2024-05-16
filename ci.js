@@ -17,6 +17,10 @@ config.events.forEach(async event => {
     event.users.map(async user => {
         var flights = await Promise.all(user.flights.map(async flight => {
             var res
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(flight.date)) {
+                console.error(`Invalid date in event ${event.name}: ${flight.code} on ${flight.date} for user ${user.name}/${user.id}`)
+                process.exit(1)
+            }
             try {
                 res = await utils.checkFlight(flight.code, new Date(flight.date));
             } catch (e) {
