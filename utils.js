@@ -43,17 +43,35 @@ function humanReadableDiff(date1, date2) {
     seconds = Math.abs(seconds);
 
     var interval = Math.floor(seconds / 31536000);
-    if (interval >= 1) return interval + " year" + (interval > 1 ? "s" : "") + prefix;
+    var timeStr = "";
+    if (interval >= 1) {
+        timeStr += interval + " year" + (interval > 1 ? "s" : "");
+        seconds %= 31536000;
+    }
     interval = Math.floor(seconds / 2592000);
-    if (interval >= 1) return interval + " month" + (interval > 1 ? "s" : "") + prefix;
+    if (interval >= 1) {
+        timeStr += (timeStr ? ", " : "") + interval + " month" + (interval > 1 ? "s" : "");
+        seconds %= 2592000;
+    }
     interval = Math.floor(seconds / 86400);
-    if (interval >= 1) return interval + " day" + (interval > 1 ? "s" : "") + prefix;
+    if (interval >= 1) {
+        timeStr += (timeStr ? ", " : "") + interval + " day" + (interval > 1 ? "s" : "");
+        seconds %= 86400;
+    }
     interval = Math.floor(seconds / 3600);
-    if (interval >= 1) return interval + " hour" + (interval > 1 ? "s" : "") + prefix;
+    if (interval >= 1) {
+        timeStr += (timeStr ? ", " : "") + interval + " hour" + (interval > 1 ? "s" : "");
+        seconds %= 3600;
+    }
     interval = Math.floor(seconds / 60);
-    if (interval >= 1) return interval + " minute" + (interval > 1 ? "s" : "") + prefix;
-
-    return Math.floor(seconds) + " second(s)" + prefix;
+    if (interval >= 1) {
+        timeStr += (timeStr ? ", " : "") + interval + " minute" + (interval > 1 ? "s" : "");
+        seconds %= 60;
+    }
+    if (seconds > 0) {
+        timeStr += (timeStr ? ", " : "") + seconds + " second" + (seconds > 1 ? "s" : "");
+    }
+    return timeStr + prefix;
 }
 
 module.exports = { checkFlight, progress, fmtDate, humanReadableDiff }
