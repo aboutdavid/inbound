@@ -3,7 +3,6 @@ const reachedDateLimit = (date) => (date - Date.now()) > 2 * 24 * 60 * 60 * 1000
 
 async function checkFlight(code, date) {
     if (reachedDateLimit(date)) return { error: true }
-    if (!/^[A-Za-z]{2}\d{1,4}$/.test(code)) return { invalid: true }
     const res = await fetch(`https://aeroapi.flightaware.com/aeroapi/flights/${code}?` + new URLSearchParams({
         start: new Date(date).toISOString(),
         max_pages: 1
