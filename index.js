@@ -53,7 +53,7 @@ const app = new App({
         var txt = ""
 
 
-        txt += flightsLeft == 0 ? `*${user.name} has landed from their final flight.*` : `*<@${user.id}> has ${flightsLeft} ${flightsLeft != 1 ? "flights" : "flight"} to complete*`;
+        txt += flightsLeft == 0 ? `*${user.name} has landed from their final flight.*` : `*${user.name} has ${flightsLeft} ${flightsLeft != 1 ? "flights" : "flight"} to complete*`;
 
         flights.forEach((flight, i) => {
           txt += `\n\n*${flight.ident_iata}: ${flight.origin?.code_iata} -> ${flight.destination?.code_iata}*\n`
