@@ -76,7 +76,7 @@ const app = new App({
 
       let texts = await Promise.all(promises);
       texts.push(`⌚ All times are in ${event.timezone}`)
-      texts.push(`🗑️ Messages here are automatically deleted. Please see #inbound-dev for more details.`)
+      texts.push(`🗑️ Messages here are automatically deleted. Please see <#C074EHMRFRN> for more details.`)
       let text = texts.join('\n');
 
       let chunks = [];
