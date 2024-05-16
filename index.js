@@ -44,7 +44,7 @@ const app = new App({
           const res = await utils.checkFlight(flight.code, new Date(flight.date));
           if (!res.error) return res
         }))
-        flights = flights.sort(function (a, b) {
+        flights = flights.filter(item => item).sort(function (a, b) {
 
           return new Date(a.scheduled_out) - new Date(b.scheduled_out);
         });
