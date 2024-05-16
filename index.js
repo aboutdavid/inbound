@@ -103,7 +103,7 @@ const app = new App({
   }
 
   await pull()
-  setTimeout(pull, 1000 * 60 * 5)
+  setInterval(pull, 1000 * 60 * 5)
 
 
   await app.start(process.env.PORT || 3000);
