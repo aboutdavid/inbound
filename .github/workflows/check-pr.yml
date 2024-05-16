@@ -1,4 +1,4 @@
-name: gitme
+name: check-valid-flights
 on: [push, pull_request]
 jobs:
   check-valid-flights:
