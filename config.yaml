@@ -12,4 +12,11 @@ events:
       date: '2024-05-15'
     id: U04CBLNSVH6
     name: David
+  - flights:
+    - code: DL2796
+      date: '2024-05-15'
+    - code: WN4727
+      date: '2024-05-15'
+    id: U04CBLNSVH6
+    name: Orpheus
 version: 1
