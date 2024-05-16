@@ -1,0 +1,17 @@
+---
+version: 1
+events:
+- name: Outernet
+  start: '2024-05-15'
+  end: '2024-05-17'
+  channel: C073PA08MQA
+  timezone: America/New_York
+  users:
+  - id: U04CBLNSVH6
+    name: David
+    flights:
+    - code: DL2796
+      date: '2024-05-15'
+    - code: WN4727
+      date: '2024-05-15'
+
