@@ -56,7 +56,7 @@ const app = new App({
         txt += flightsLeft == 0 ? `*${user.name} has landed from their final flight.*` : `*${user.name} has ${flightsLeft} ${flightsLeft != 1 ? "flights" : "flight"} to complete*`;
 
         flights.forEach((flight, i) => {
-          txt += `\n\n*${flight.ident_iata}: ${flight.origin?.code_iata} -> ${flight.destination?.code_iata}*\n`
+          txt += `\n\n*${flight.ident_iata} (${flight.ident_icao}): ${flight.origin?.code_iata} (${flight.origin?.code_icao}) -> ${flight.destination?.code_iata} (${flight.destination?.code_icao})*\n`
           txt += `ℹ️ Status: ${flight.status} • 🛄 Baggage claim: ${flight.baggage_claim || "None"} • ⛩️ Gate at ${flight.origin?.code_iata}: ${flight.gate_origin || "Unknown"} • ⛩️ Gate at ${flight.destination?.code_iata}: ${flight.gate_destination || "Unknown"} • 📏 ${flight.route_distance || "Unknown"} miles • 🏎️ ${flight.filed_airspeed || "Unknown"} mph \n`
           txt += `🛫 Take off (scheduled): ${flight.scheduled_off ? utils.fmtDate(flight.scheduled_off, event.timezone) : "Unknown"} `
           txt += `(Estimated: ${flight.actual_off ? utils.fmtDate(flight.estimated_off, event.timezone) : "Unknown"}) `
