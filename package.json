@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon dev"
+  },
   "dependencies": {
     "@slack/bolt": "^3.17.1",
     "dotenv": "^16.3.1",
