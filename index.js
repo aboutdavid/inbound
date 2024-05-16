@@ -76,6 +76,7 @@ const app = new App({
 
       let texts = await Promise.all(promises);
       texts.push(`⌚ All times are in ${event.timezone}`)
+      texts.push(`🗑️ Messages here are automatically deleted. Please see #inbound-dev for more details.`)
       let text = texts.join('\n');
 
       let chunks = [];
@@ -101,7 +102,15 @@ const app = new App({
       }
     })
   }
+  app.message(/.*/gim, async ({ message }) => {
+    const event = config.events.find(event => event.channel == message.channel)
+    if (event) await app.client.chat.delete({
+      channel: message.channel,
+      ts: message.ts,
+      token: process.env.SLACK_USER_TOKEN
+    })
 
+  })
   await pull()
   setInterval(pull, 1000 * 60 * 5)
 
