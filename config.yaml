@@ -16,8 +16,13 @@ events:
     id: U04RA9UV3RA
     name: John
   - flights:
-    - code: 'FLE1615'
+    - code: FLE1615
       date: '2024-05-17'
     id: U03MMGVPMFE
     name: Kyle Liao
+  - flights:
+    - code: PD2946
+      date: '2024-05-17'
+    id: U056J6JURFF
+    name: Sofia Egan
 version: 1
