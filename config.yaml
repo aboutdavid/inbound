@@ -25,4 +25,9 @@ events:
       date: '2024-05-17'
     id: U056J6JURFF
     name: Sofia Egan
+  - flights:
+    - code: UA313
+      date: '2024-05-17'
+    id: U04QD71QWS0
+    name: Manitej & Alex
 version: 1
