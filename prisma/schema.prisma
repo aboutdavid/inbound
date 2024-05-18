@@ -1,0 +1,18 @@
+generator client {
+    provider      = "prisma-client-js"
+    binaryTargets = ["native"]
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = "file:./database.sqlite"
+}
+
+model Flight {
+    id           Int      @id @default(autoincrement())
+    createdAt    DateTime @default(now())
+    flightNumber String
+    slackId      String
+    flightDate   DateTime
+    event        String
+}
