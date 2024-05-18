@@ -38,7 +38,7 @@ const app = new App({
         ))
 
 
-      let promises = event.users.map(async user => {
+      let promises = (await utils.getAllFlights(event.name, app)).map(async user => {
 
         var flights = await Promise.all(user.flights.map(async flight => {
           const res = await utils.checkFlight(flight.code, new Date(flight.date));
@@ -102,18 +102,12 @@ const app = new App({
       }
     })
   }
-  app.message(/.*/gim, async ({ message }) => {
-    const event = config.events.find(event => event.channel == message.channel)
-    if (event) await app.client.chat.delete({
-      channel: message.channel,
-      ts: message.ts,
-      token: process.env.SLACK_USER_TOKEN
-    })
-
-  })
+  
   await pull()
-  setInterval(pull, 1000 * 60 * 5)
-
+  setInterval(pull, 1000 * 60 * 10)
+  require("./interactions/message")(app)
+  require("./interactions/addFlight")(app, pull)
+  require("./interactions/rmFlight")(app, pull)
 
   await app.start(process.env.PORT || 3000);
 

@@ -1,5 +1,8 @@
 require("dotenv").config()
 const reachedDateLimit = (date) => (date - Date.now()) > 2 * 24 * 60 * 60 * 1000 || (Date.now() - date) > 8 * 24 * 60 * 60 * 1000;
+const { PrismaClient } = require("@prisma/client");
+const { App } = require("@slack/bolt");
+const prisma = new PrismaClient();
 
 async function checkFlight(code, date) {
     if (reachedDateLimit(date)) return { error: true }
@@ -72,5 +75,27 @@ function humanReadableDiff(date1, date2) {
     }
     return timeStr + prefix;
 }
+/**
+ * @param {App} app
+ */
+async function getAllFlights(eventName, app) {
+    var raw = await prisma.flight.findMany({
+        where: {
 
-module.exports = { checkFlight, progress, fmtDate, humanReadableDiff }
+        }
+    })
+    const users = [...new Set(raw.map(user => user.slackId))]
+    var flights = await Promise.all(users.map(async user => {
+        const info = await app.client.users.info({
+            user
+        })
+        return {
+            id: user,
+            name: info.user.real_name,
+            flights: raw.filter(u => (u.slackId == user && u.event == eventName)).map(f => { return { code: f.flightNumber, date: f.flightDate } })
+        };
+    }));
+
+    return flights
+}
+module.exports = { checkFlight, progress, fmtDate, humanReadableDiff, getAllFlights }
