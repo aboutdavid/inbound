@@ -1,7 +1,7 @@
 version: 1
 events:
-- channel: C073PA08MQA
+- channel: C073QS4DUJZ
   end: '2024-05-21'
-  name: Inbound Testing
+  name: Apocalypse
   start: '2024-05-16'
   timezone: America/New_York
