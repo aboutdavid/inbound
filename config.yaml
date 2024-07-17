@@ -5,3 +5,8 @@ events:
   name: Apocalypse
   start: '2024-05-16'
   timezone: America/New_York
+- channel: C07CP46USNS
+  end: '2024-07-29'
+  name: 'The Boreal Express'
+  start: '2024-07-20'
+  timezone: America/New_York
